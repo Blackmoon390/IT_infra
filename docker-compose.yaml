@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: kimai
+      MYSQL_DATABASE: kimai
+      MYSQL_USER: kimai
+      MYSQL_PASSWORD: kimai
+
+  kimai:
+    build: .
+    ports:
+      - "8001:80"
+    environment:
+      - APP_ENV=prod
+      - DATABASE_URL=mysql://kimai:kimai@mysql/kimai
+    depends_on:
+      - mysql
